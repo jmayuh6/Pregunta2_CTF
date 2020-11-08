@@ -1,0 +1,113 @@
+$(document).ready(function () {
+    var principalSwiper = new Swiper('#principal-swiper', {
+        loop: true,
+        slidesPerView: 1,
+        autoplay: {
+            delay: 3000,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            renderBullet: function (index, className) {
+              return '<span class="' + className + '">' + (index + 1) + '</span>';
+            },
+        },
+    });
+
+    function move() {
+        var elem = document.getElementById("progress"); 
+        var width = 1;
+        var autoplayTime = 3000 / 100;
+        var id = setInterval(frame, autoplayTime);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++; 
+                elem.style.width = width + '%'; 
+            }
+        }
+    }
+
+    move();
+
+    principalSwiper.on('slideChange', function () {
+        move();
+    });
+
+    var accesosRapidosSwiper = new Swiper('#accesos-rapidos-swiper', {
+        loop: true,
+        slidesPerView: 2,
+        spaceBetween: 10,
+        breakpoints: {
+            480: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+            }
+        }
+    })
+
+    $(".flecha-antes").click(function () {
+        accesosRapidosSwiper.slidePrev();
+    });
+    $(".flecha-despues").click(function () {
+        accesosRapidosSwiper.slideNext();
+    });
+
+    var noticiasSwiper = new Swiper('#noticias-swiper', {
+        loop: false,
+        slidesPerView: 1,
+    });
+
+    var enlacesExternosSwiper = new Swiper('#enlaces-externos-swiper', {
+        loop: true,
+        autoplay: {
+            delay: 2000,
+        },
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            480: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            1200: {
+                slidesPerView: 4,
+                spaceBetween: 16,
+            }
+        }
+    })
+
+    $(".enlaces-externos .flecha-antes").click(function () {
+        enlacesExternosSwiper.slidePrev();
+    });
+    $(".enlaces-externos .flecha-despues").click(function () {
+        enlacesExternosSwiper.slideNext();
+    });
+
+});
+
